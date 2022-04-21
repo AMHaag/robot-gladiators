@@ -139,6 +139,7 @@ var endGame = function() {
   // if player is still alive, player wins!
   if (playerInfo.health > 0) {
     window.alert("Great job, you've survived the game! You now have a score of " + playerInfo.money + '.');
+    highscore();
   } else {
     window.alert("You've lost your robot in battle!");
   }
@@ -242,6 +243,30 @@ console.log(enemyInfo[0].name);
 console.log(enemyInfo[0]['attack']);
 
 /* END GAME INFORMATION / VARIABLES */
+
+var highscore = function (){
+  //if there is no current highscore
+ if (localStorage.getItem("highscoreName") === null){
+   localStorage.setItem("highscoreName", playerInfo.name);
+   localStorage.setItem("highscoreMoney", playerInfo.money);
+   window.alert("Congratulations, you have the highscore! " + playerInfo.name + " had " + playerInfo.money + " remaining");
+ }
+ //if player did not exceed highscore
+ else if (localStorage.getItem("highscoreMoney") > playerInfo.money){
+   window.alert("You did not break the current highscore held by "+ localStorage.getItem("highscoreName") + "with "+ localStorage.getItem("highscoreMoney") + "money remaining.");
+ }
+ else {
+   window.alert("Congratulations, you have the highscore! " + playerInfo.name + " had " + playerInfo.money + " remaining")
+ }
+
+
+
+
+}
+
+
+
+
 
 /* RUN GAME */
 startGame();

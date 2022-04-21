@@ -71,11 +71,40 @@ var fight = function(enemyName) {
 
 
 var shop = function (){
-//Add Shop functionality after skip or defeated enemy
-  // Ask the player if they want to "shop"
-  var shopConfirm = window.confirm("Would you like to Shop?")
-  // If no, continue as normal
-  // If yes, call the shop() function
+  console.log("entered the shop");
+
+  var shopOptionPrompt = window.prompt( "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.");
+
+  switch (shopOptionPrompt){
+    case "REFILL": // new case
+    case "refill":
+  if (playerMoney >= 7) {
+    window.alert("Refilling player's health by 20 for 7 dollars.");
+
+    // increase health and decrease money
+    playerHealth = playerHealth + 20;
+    playerMoney = playerMoney - 7;
+  }
+  else {
+    window.alert("You don't have enough money!");
+  }
+
+  break;
+case "UPGRADE": //new case
+case "upgrade":
+  if (playerMoney >= 7) {
+    window.alert("Upgrading player's attack by 6 for 7 dollars.");
+
+   // increase attack and decrease money
+    playerAttack = playerAttack + 6;
+    playerMoney = playerMoney - 7;
+  }
+  else {
+    window.alert("You don't have enough money!");
+  }
+
+  break;
+  }
   // In the shop() function, ask player if they want to "refill" health, "upgrade" attack, or "leave" the shop
   // If refill, subtract money points from player and increase health
   // If upgrade, subtract money points from player and increase attack power
@@ -125,6 +154,13 @@ var startGame = function(){
 
     // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
     fight(pickedEnemyName);
+
+    if (i < enemyNames.length - 1 && playerHealth > 0){
+      var shopConfirm = window.confirm("The fight is over, visit the store before the next round?")
+      if (shopConfirm){
+        shop();
+      }
+    }
   }
   // if player isn't alive, stop the game
   else {
@@ -135,14 +171,6 @@ var startGame = function(){
 }
   endGame();
 }
-
-
-
-
-//Add end game function
-  // - Alert Player of  total stats
-  // - Ask Player if they want to play again
-  // - If yes call startGame()
 
 
 startGame();
